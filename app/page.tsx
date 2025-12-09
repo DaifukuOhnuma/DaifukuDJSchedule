@@ -33,7 +33,7 @@ export default async function Page() {
       {/* 🎧 ヒーローセクション（トップ画像）めう */}
       <section className={styles.top}>
         <div>
-          <h1 className={styles.title}>DJ MEU SCHEDULE</h1>
+          <h1 className={styles.title}>だいふくのDJ出演予定一覧</h1>
           <p className={styles.description}>
             Upcoming Gigs & Party Information
           </p>
@@ -42,7 +42,7 @@ export default async function Page() {
         <Image
           className={styles.bgimg}
           src="/img-mv.jpg" 
-          alt="DJ MEU"
+          alt="Bigswamp a.k.a.だいふく"
           width={3600}
           height={1200}
           priority
@@ -79,13 +79,15 @@ export default async function Page() {
          <div className={styles.horizontal}>
             <div>
               <h2 className={styles.sectionTitleEn}>Profile</h2>
-              <p className={styles.sectionTitleJa}>DJ MEU</p>
+              <p className={styles.sectionTitleJa}>Bigswamp a.k.a.だいふく</p>
               <p className={styles.sectionDescription}>
-                Techno / House DJ.<br />
-                都内を中心に活動中。お問い合わせはXのDMまで。
+                雑食系オールジャンルDJ<br />
+                テクノにハウスから、ゲーム音楽やJPOPにアニソンまで、<br />
+                グルーヴ重視のプレイスタイルでもちもちしている。<br />
+                大阪を中心に活動中。お問い合わせはXのDMまで。
               </p>
                {/* リンク先をXのアカウントなどに変えると便利めう */}
-              <ButtonLink href="https://twitter.com/">Contact (X)</ButtonLink>
+              <ButtonLink href="https://x.com/dfk_ohnuma">Contact (X)</ButtonLink>
             </div>
             {/* プロフィール画像があれば差し替えるめう */}
              <Image
