@@ -16,7 +16,6 @@ export default function Header() {
           priority
         />
       </Link>
-      <Menu />
     </header>
   );
 }
