@@ -1,5 +1,5 @@
 import { EventItem } from '@/app/_libs/microcms'; // 🚨 1. Article型をEventItem型に修正！
-import EventListItem from '../NewsListItem'; // 🚨 2. NewsListItemファイル名はそのまま利用しつつ、ここでEventListItemとして扱う！
+import EventListItem from '../EventListItem'; // 🚨 2. NewsListItemファイル名はそのまま利用しつつ、ここでEventListItemとして扱う！
 
 // コンポーネントのPropsの型定義を修正
 type Props = {
