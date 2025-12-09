@@ -34,9 +34,9 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="ja">
       <body className={styles.body}>
-        <Header />
+
         <main>{children}</main>
-        <Footer />
+
       </body>
     </html>
   );
