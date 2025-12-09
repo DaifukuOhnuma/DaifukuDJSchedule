@@ -7,7 +7,7 @@ const EVENT_LIST_LIMIT = 10; // ← 仮にここに定数を書くめう。
 
 // 🚨 読み込む部品の名前も、めうの用途に合わせた名前に変更するめう！
 // もしコンポーネントのファイル名もNewsList.tsxのままなら、以下の行はそのままにするか、ファイル名を変更してそれに合わせるめう！
-import EventList from '@/app/_components/NewsList'; 
+import EventList from '@/app/_components/EventList'; 
 
 type Props = {
   params: Promise<{
