@@ -1,38 +1,58 @@
 import Image from 'next/image';
-import { formatRichText } from '@/app/_libs/utils';
-import { type Article } from '@/app/_libs/microcms';
+// import { formatRichText } from '@/app/_libs/utils'; // リッチテキスト(content)がないなら不要めう
+import { type EventItem } from '@/app/_libs/microcms'; // 🚨 Article型ではなくEventItem型を使うめう！
 import PublishedDate from '../Date';
 import styles from './index.module.css';
-import Category from '../Category';
+// import Category from '../Category'; // カテゴリがないなら削除めう
 
 type Props = {
-  data: Article;
+  data: EventItem; // 🚨 型を修正めう
 };
 
 export default function Article({ data }: Props) {
   return (
     <main>
+      {/* 📅 イベントタイトル */}
       <h1 className={styles.title}>{data.title}</h1>
-      <p className={styles.description}>{data.description}</p>
+      
+      {/* ℹ️ イベント情報リスト */}
       <div className={styles.meta}>
-        <Category category={data.category} />
-        <PublishedDate date={data.publishedAt || data.createdAt} />
+        <p>🗓️ <b>日時:</b> <PublishedDate date={data.datetime} /></p>
+        <p>🏢 <b>会場:</b> {data.venue}</p>
+        <p>🎶 <b>ジャンル:</b> {data.genre}</p>
+        <p>💰 <b>料金:</b> {data.price}</p>
       </div>
-      {data.thumbnail && (
+
+      {/* 🖼️ フライヤー画像 */}
+      {data.flyerImage && (
         <Image
-          src={data.thumbnail?.url}
-          alt=""
+          src={data.flyerImage.url}
+          alt={data.title}
           className={styles.thumbnail}
-          width={data.thumbnail?.width}
-          height={data.thumbnail?.height}
+          width={data.flyerImage.width}
+          height={data.flyerImage.height}
         />
       )}
-      <div
-        className={styles.content}
-        dangerouslySetInnerHTML={{
-          __html: `${formatRichText(data.content)}`,
-        }}
-      />
+
+      {/* 📝 その他詳細（もしあれば） */}
+      <div className={styles.content}>
+        {/* 共演者などの情報を表示するめう */}
+        {data.coPerformers && (
+          <div>
+             <h3>出演者</h3>
+             <p style={{ whiteSpace: 'pre-wrap' }}>{data.coPerformers}</p>
+          </div>
+        )}
+        
+        {/* チケットリンクがあれば表示 */}
+        {data.ticketUrl && (
+           <div style={{ marginTop: '20px' }}>
+             <a href={data.ticketUrl} target="_blank" rel="noopener noreferrer">
+               🎫 チケットを予約するめう！
+             </a>
+           </div>
+        )}
+      </div>
     </main>
   );
 }
