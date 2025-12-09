@@ -12,12 +12,15 @@
 }
 
 .meta {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  flex-shrink: 1;
+  /* display: flex; <--- これが改行を乱している犯人めう！ */
+  
+  /* 🚨 修正1: 縦並びにするめう！ */
+  display: block; 
+  /* justify-content: flex-start;  <--- flexを消すので不要めう */
+  /* align-items: center; <--- flexを消すので不要めう */
+  /* flex-shrink: 1; <--- flexを消すので不要めう */
   gap: 24px;
-  margin-bottom: 64px;
+  margin-bottom: 24px;
 }
 
 .thumbnail {
@@ -176,8 +179,9 @@
   }
 
   .meta {
-    display: flex;
-    align-items: center;
+    /* 🚨 修正3: モバイルでも縦並びを強制するめう！ */
+    display: block; 
+    align-items: center; /* flexを消すので不要めう */
     margin-bottom: 40px;
     font-size: 0.9rem;
   }
