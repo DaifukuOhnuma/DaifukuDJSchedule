@@ -1,125 +1,103 @@
 import Image from 'next/image';
 import { getEventList } from '@/app/_libs/microcms';
-import { TOP_NEWS_LIMIT } from '@/app/_constants';
-import EventList from '@/app/_components/EventList';
+// import { TOP_NEWS_LIMIT } from '@/app/_constants'; // 定数を使わず直接指定してもOKめう
+import EventList from '@/app/_components/EventList'; // 🚨 EventListを正しく読み込むめう！
 import styles from './page.module.css';
 import ButtonLink from '@/app/_components/ButtonLink';
 
+// 取得するイベント数の上限（多めに設定しておくと安心めう）
+const EVENT_LIMIT = 50; 
+
 export default async function Page() {
+  // 1. MicroCMSからイベントデータを取得するめう
   const data = await getEventList({
-    limit: TOP_NEWS_LIMIT,
+    limit: EVENT_LIMIT,
   });
+
+  // 2. 「今日以降」のイベントだけを取り出すフィルタリング処理めう！
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // 時間は無視して日付だけで比較するめう
+
+  const futureEvents = data.contents.filter((event) => {
+    // event.datetime はめうがMicroCMSで作ったフィールドIDめう！
+    // もしフィールド名が違うならここを書き換えるめう（例: event.date など）
+    const eventDate = new Date(event.datetime);
+    return eventDate >= today;
+  });
+
+  // 日付が近い順に並び替え（MicroCMSで既に並んでいるなら不要だけど、念のためめう）
+  futureEvents.sort((a, b) => new Date(a.datetime).getTime() - new Date(b.datetime).getTime());
+
   return (
     <>
+      {/* 🎧 ヒーローセクション（トップ画像）めう */}
       <section className={styles.top}>
         <div>
-          <h1 className={styles.title}>テクノロジーの力で世界を変える</h1>
+          <h1 className={styles.title}>DJ MEU SCHEDULE</h1>
           <p className={styles.description}>
-            私たちは市場をリードしているグローバルテックカンパニーです。
+            Upcoming Gigs & Party Information
           </p>
         </div>
+        {/* 背景画像は好きなDJ写真に差し替えるといいめう！ */}
         <Image
           className={styles.bgimg}
-          src="/img-mv.jpg"
-          alt=""
+          src="/img-mv.jpg" 
+          alt="DJ MEU"
           width={3600}
           height={1200}
           priority
         />
       </section>
+
+      {/* 📅 スケジュール一覧セクションめう */}
       <section className={styles.news}>
-        <h2 className={styles.newsTitle}>News</h2>
-        <NewsList articles={data.contents} />
+        <h2 className={styles.newsTitle}>Schedule</h2>
+        
+        {/* 🚨 ここで NewsList ではなく EventList を使うのがポイントめう！ */}
+        {/* フィルタリングした futureEvents を渡すめう！ */}
+        <EventList articles={futureEvents} />
+
+        {/* イベントが何もない時のメッセージめう */}
+        {futureEvents.length === 0 && (
+          <p style={{ textAlign: 'center', margin: '40px 0' }}>
+            現在予定されているイベントはないめう...<br />
+            X (Twitter) で最新情報をチェックしてほしいめう！
+          </p>
+        )}
+
         <div className={styles.newsLink}>
-          <ButtonLink href="/news">もっとみる</ButtonLink>
+          {/* 過去ログ（アーカイブ）ページを作りたいならこのボタンを残すめう */}
+          {/* いらないならこのdivごと消してもOKめう */}
+          <ButtonLink href="/news">All Archives</ButtonLink>
         </div>
       </section>
+
+      {/* 🏢 以下のコーポレート用セクション（Business, AboutUs, Hiring）は全て削除しためう！ */}
+      {/* 必要なのは「プロフィール」くらいだと思うから、必要なら以下のようにシンプルに追加するめう */}
+      
       <section className={styles.section}>
-        <div className={styles.horizontal}>
-          <div>
-            <h2 className={styles.sectionTitleEn}>Business</h2>
-            <p className={styles.sectionTitleJa}>事業内容</p>
-            <p className={styles.sectionDescription}>
-              当社は、次世代テクノロジーの研究開発・製造・販売を行う革新的な企業です。
-              <br />
-              AI、ロボット工学、自律システムなど、幅広い分野でのソリューション提供を通じて、社会の進化と未来の創造に貢献します。
-            </p>
-            <ButtonLink href="/business">もっとみる</ButtonLink>
-          </div>
-          <Image
-            className={styles.businessImg}
-            src="/img-business.png"
-            alt=""
-            width={1024}
-            height={1024}
-          />
-        </div>
-      </section>
-      <div className={styles.aboutus}>
-        <section className={styles.section}>
-          <div className={styles.horizontal}>
-            <Image
-              className={styles.aboutusImg}
-              src="/img-aboutus.jpg"
-              alt=""
-              width={6000}
-              height={4000}
-            />
+         <div className={styles.horizontal}>
             <div>
-              <h2 className={styles.sectionTitleEn}>About Us</h2>
-              <p className={styles.sectionTitleJa}>私たちについて</p>
+              <h2 className={styles.sectionTitleEn}>Profile</h2>
+              <p className={styles.sectionTitleJa}>DJ MEU</p>
               <p className={styles.sectionDescription}>
-                「テクノロジーの力で世界を変える」をミッションに掲げ、日々活動をしています。
+                Techno / House DJ.<br />
+                都内を中心に活動中。お問い合わせはXのDMまで。
               </p>
-              <dl className={styles.info}>
-                <dt className={styles.infoTitle}>社名</dt>
-                <dd className={styles.infoDescription}>株式会社Simple</dd>
-              </dl>
-              <dl className={styles.info}>
-                <dt className={styles.infoTitle}>設立</dt>
-                <dd className={styles.infoDescription}>2023年4月</dd>
-              </dl>
-              <dl className={styles.info}>
-                <dt className={styles.infoTitle}>所在地</dt>
-                <dd className={styles.infoDescription}>
-                  〒000-0000
-                  <br />
-                  東京都渋谷区渋谷1-1-1
-                </dd>
-              </dl>
-              <dl className={styles.info}>
-                <dt className={styles.infoTitle}>代表者</dt>
-                <dd className={styles.infoDescription}>鈴木 太郎</dd>
-              </dl>
-              <dl className={styles.info}>
-                <dt className={styles.infoTitle}>資本金</dt>
-                <dd className={styles.infoDescription}>1,000万円</dd>
-              </dl>
+               {/* リンク先をXのアカウントなどに変えると便利めう */}
+              <ButtonLink href="https://twitter.com/">Contact (X)</ButtonLink>
             </div>
-          </div>
-        </section>
-      </div>
-      <section className={styles.section}>
-        <div className={styles.horizontal}>
-          <div>
-            <h2 className={styles.sectionTitleEn}>We are hiring</h2>
-            <p className={styles.sectionTitleJa}>採用情報</p>
-            <p className={styles.sectionDescription}>
-              当社では、チャレンジ精神を持った人材を求めています。
-              <br />
-              新しいアイデアを出し合い、成長する環境で活躍したい方は、ぜひご応募ください。当社でのキャリアを築きながら、技術の最前線で力を発揮しましょう。
-            </p>
-            <ButtonLink href="">採用情報へ</ButtonLink>
-          </div>
-          <Image
-            className={styles.hiringImg}
-            src="/img-hiring.jpg"
-            alt=""
-            width={960}
-            height={960}
-          />
-        </div>
+            {/* プロフィール画像があれば差し替えるめう */}
+             <Image
+              className={styles.businessImg}
+              src="/img-business.png"
+              alt="Profile"
+              width={1024}
+              height={1024}
+            />
+         </div>
       </section>
+
     </>
   );
 }
