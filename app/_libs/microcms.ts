@@ -64,7 +64,7 @@ export type Meta = {
   canonical?: string;
 };
 
-export type Article = News & MicroCMSContentId & MicroCMSDate;
+export type EventItem = News & MicroCMSContentId & MicroCMSDate;
 
 if (!process.env.MICROCMS_SERVICE_DOMAIN) {
   throw new Error('MICROCMS_SERVICE_DOMAIN is required');
