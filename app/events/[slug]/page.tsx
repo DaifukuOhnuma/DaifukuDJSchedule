@@ -4,6 +4,9 @@ import Article from '@/app/_components/Article'; // 前回修正した Article/i
 import styles from './page.module.css';
 import ButtonLink from '@/app/_components/ButtonLink';
 
+// app/events/[slug]/page.tsx の先頭付近に追記めう
+export const revalidate = 1800; // 1800秒 = 30分ごとに更新チェックするめう
+
 type Props = {
   params: Promise<{
     slug: string;
