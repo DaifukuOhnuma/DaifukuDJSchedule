@@ -43,6 +43,14 @@ export default function Article({ data }: Props) {
              <p style={{ whiteSpace: 'pre-wrap' }}>{data.coPerformers}</p>
           </div>
         )}
+
+        {/* Xの説明コメントがあれば表示 */}
+        {data.xPostText && (
+           <div style={{ marginTop: '20px' }}>
+             <h3>コメント</h3>
+             <p style={{ whiteSpace: 'pre-wrap' }}>{data.xPostText}</p>
+           </div>
+        )}
         
         {/* 外部リンクがあれば表示 */}
         {data.url && (
