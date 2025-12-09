@@ -45,10 +45,10 @@ export default function EventListItem({ event }: Props) {
         <dl className={styles.content}>
           {/* 🚨 4. 日時、場所、料金などの情報を追加するめう！ */}
           <dd className={styles.meta}>
-            <p>🗓️ **日時:** {event.datetime}</p>
-            <p>🏢 **会場:** {event.venue}</p>
+            <p>🗓️ <b>日時:</b> <PublishedDate date={event.datetime} /> </p>
+            <p>🏢 <b>会場:</b> {event.venue}</p>
             <p>🎶 <b>ジャンル:</b> {genreString}</p>
-            <p>💰 **料金:** {event.price}</p>
+            <p>💰 <b>料金:</b> {event.price}</p>
           </dd>
           <dt className={styles.title}>{event.title}</dt>
           <dd className={styles.meta}>
