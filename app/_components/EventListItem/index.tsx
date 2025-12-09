@@ -11,6 +11,15 @@ type Props = {
 
 // コンポーネント名を EventListItem に変更！引数も event に！
 export default function EventListItem({ event }: Props) {
+
+  // 🚨 修正コードの差し込み箇所はここめう！
+  // ------------------------------------------------------------------
+  // ジャンル表示のためのロジックめう
+  const genreString = Array.isArray(event.genre) 
+    ? event.genre.map(g => g.name).join(' / ') 
+    : event.genre;
+  // ------------------------------------------------------------------
+  
   return (
     <li className={styles.list}>
       {/* 🚨 リンク先を修正。/events/ に変更し、IDも event.id にするめう */}
@@ -38,7 +47,7 @@ export default function EventListItem({ event }: Props) {
           <dd className={styles.meta}>
             <p>🗓️ **日時:** {event.datetime}</p>
             <p>🏢 **会場:** {event.venue}</p>
-            <p>🎶 **ジャンル:** {event.genre}</p>
+            <p>🎶 <b>ジャンル:</b> {genreString}</p>
             <p>💰 **料金:** {event.price}</p>
           </dd>
           <dt className={styles.title}>{event.title}</dt>
