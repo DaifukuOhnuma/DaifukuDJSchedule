@@ -24,7 +24,7 @@ export default function PublishedDate({ date }: Props) {
     hour: '2-digit',
     minute: '2-digit',
     // タイムゾーンの'Z'を無視するめう（Next.js環境で自動で現地時間になるはずめう）
-    // timeZone: 'Asia/Tokyo', // 必要なら指定するめう
+    timeZone: 'Asia/Tokyo', // 必要なら指定するめう
 
   });
 
