@@ -68,7 +68,7 @@ export const client = createClient({
 export const getNewsList = async (queries?: MicroCMSQueries) => {
   const listData = await client
     .getList<News>({
-      endpoint: 'news',
+      endpoint: 'events',
       queries,
     })
     .catch(notFound);
@@ -79,7 +79,7 @@ export const getNewsList = async (queries?: MicroCMSQueries) => {
 export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client
     .getListDetail<News>({
-      endpoint: 'news',
+      endpoint: 'events',
       contentId,
       queries,
     })
@@ -92,7 +92,7 @@ export const getNewsDetail = async (contentId: string, queries?: MicroCMSQueries
 export const getCategoryList = async (queries?: MicroCMSQueries) => {
   const listData = await client
     .getList<Category>({
-      endpoint: 'categories',
+      endpoint: 'events',
       queries,
     })
     .catch(notFound);
@@ -104,7 +104,7 @@ export const getCategoryList = async (queries?: MicroCMSQueries) => {
 export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQueries) => {
   const detailData = await client
     .getListDetail<Category>({
-      endpoint: 'categories',
+      endpoint: 'events',
       contentId,
       queries,
     })
@@ -117,7 +117,7 @@ export const getCategoryDetail = async (contentId: string, queries?: MicroCMSQue
 export const getMembersList = async (queries?: MicroCMSQueries) => {
   const listData = await client
     .getList<Member>({
-      endpoint: 'members',
+      endpoint: 'events',
       queries,
     })
     .catch(notFound);
@@ -128,7 +128,7 @@ export const getMembersList = async (queries?: MicroCMSQueries) => {
 export const getBusinessList = async (queries?: MicroCMSQueries) => {
   const listData = await client
     .getList<Business>({
-      endpoint: 'business',
+      endpoint: 'events',
       queries,
     })
     .catch(notFound);
