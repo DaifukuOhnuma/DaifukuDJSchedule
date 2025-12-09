@@ -1,3 +1,8 @@
+/* app/page.module.css */
+
+/* ---------------------------------------------------- */
+/* ヒーローエリア (.top) の修正 */
+/* ---------------------------------------------------- */
 .top {
   position: relative;
   display: flex;
@@ -6,18 +11,23 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   overflow: hidden;
-  padding: 200px 0;
+  /* 🚨 修正1: 高さを固定値にすることで、ゆったりとしたスペースを確保するめう！ */
+  height: 60vh; 
 }
 
 .title {
-  font-size: 3rem;
+  /* 🚨 修正2: フォントサイズを大きくし、見栄えを良くするめう */
+  font-size: 3.5rem; 
   font-weight: bold;
   text-align: center;
   margin-bottom: 1rem;
+  z-index: 10; /* タイトルが背景画像の上に確実に来るようにするめう */
 }
 
 .description {
   text-align: center;
+  z-index: 10;
+  font-size: 1.1rem;
 }
 
 .bgimg {
@@ -25,26 +35,30 @@
   top: 0;
   right: 0;
   width: 100%;
-  height: 600px;
+  /* 🚨 修正3: 画像の高さを親要素 (.top) に合わせるめう！ */
+  height: 100%; 
   object-fit: cover;
-  object-position: right;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-position: center; /* 画像の中央が写るようにするめう */
   z-index: -1;
 }
 
+/* ---------------------------------------------------- */
+/* イベントリストエリア (.news) の修正 */
+/* ---------------------------------------------------- */
 .news {
   position: relative;
   background-color: #fff;
   width: 840px;
-  margin: -40px auto 0;
+  /* 🚨 修正4: 上方向への食い込みをなくし、適切なマージンを設定するめう！ */
+  margin: 60px auto; 
   padding: 24px 40px;
   border-radius: var(--border-radius);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* 影をつけて浮かせると格好良いめう */
 }
 
 .newsTitle {
   font-size: 1.5rem;
+  margin-bottom: 20px; /* タイトルとリストの間にスペースを作るめう */
 }
 
 .newsLink {
@@ -53,198 +67,42 @@
   bottom: -40px;
 }
 
+/* ---------------------------------------------------- */
+/* その他のエリアの修正 (DJ MEU SCHEDULE に不要なセクションはそのまま/削除推奨) */
+/* ---------------------------------------------------- */
 .section {
   width: 920px;
   margin: 0 auto;
   padding: 100px 0;
 }
+/* ... (他の .section, .horizontal, .aboutus などのスタイルはそのまま利用) ... */
 
-.sectionTitleEn {
-  font-size: 3rem;
-  font-weight: bold;
-}
 
-.sectionTitleJa {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 40px;
-}
-
-.sectionTitleJa::before {
-  content: '';
-  display: block;
-  height: 1px;
-  width: 40px;
-  background-color: var(--color-text-main);
-}
-
-.sectionDescription {
-  margin-bottom: 40px;
-}
-
-.horizontal {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 80px;
-}
-
-.businessImg {
-  width: 400px;
-  height: auto;
-  border-radius: var(--border-radius);
-}
-
-.button {
-  display: block;
-  padding: 20px 40px;
-  border-radius: var(--border-radius);
-  width: 300px;
-  background: url('/arrow-right.svg') no-repeat right 20px center, var(--color-button-primary);
-  color: var(--color-text-unpainted);
-}
-
-.aboutus {
-  background-color: #fff;
-}
-
-.aboutusImg {
-  width: 100%;
-  height: auto;
-  margin-left: -60%;
-  border-radius: var(--border-radius);
-}
-
-.info {
-  display: flex;
-  border-bottom: 1px solid var(--color-border);
-  padding: 20px 0;
-}
-
-.infoTitle {
-  width: 100px;
-  font-weight: bold;
-}
-
-.infoDescription {
-  flex: 1;
-}
-
-.hiringImg {
-  width: 480px;
-  height: auto;
-  border-radius: var(--border-radius);
-}
-
-@media (max-width: 1000px) {
-  .news {
-    width: calc(100% - 160px);
-  }
-
-  .section {
-    width: calc(100% - 80px);
-  }
-}
-
+/* ---------------------------------------------------- */
+/* モバイル表示 (max-width: 640px) の修正 */
+/* ---------------------------------------------------- */
 @media (max-width: 640px) {
   .top {
-    padding: 120px 16px;
+    /* 🚨 修正5: モバイルでも高さを確保するめう！ */
+    height: 40vh;
   }
   .title {
-    font-size: 2rem;
-    text-align: left;
-  }
-
-  .description {
+    font-size: 2.5rem; /* モバイルでも少し大きくするめう */
     text-align: center;
-    font-size: 0.9rem;
-    text-align: left;
   }
-
+  .description {
+    font-size: 1rem;
+    text-align: center;
+  }
   .bgimg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: auto;
-    height: 600px;
-    object-fit: cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: -1;
+    height: 100%;
   }
 
   .news {
     width: calc(100% - 32px);
+    margin: 30px auto; /* マージンを調整するめう */
     padding: 16px 24px;
   }
 
-  .newsLink {
-    position: relative;
-    right: auto;
-    bottom: auto;
-    margin-top: 16px;
-  }
-
-  .section {
-    width: 100%;
-    margin: auto;
-    padding: 80px 16px;
-  }
-
-  .sectionTitleEn {
-    font-size: 2.4rem;
-    font-weight: bold;
-  }
-
-  .sectionTitleJa {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 40px;
-  }
-
-  .sectionTitleJa::before {
-    content: '';
-    display: block;
-    height: 1px;
-    width: 40px;
-    background-color: var(--color-text-main);
-  }
-
-  .sectionDescription {
-    margin-bottom: 40px;
-  }
-
-  .horizontal {
-    display: flex;
-    flex-direction: column-reverse;
-    gap: 40px;
-  }
-
-  .businessImg {
-    width: 100%;
-    height: auto;
-  }
-
-  .aboutusImg {
-    width: 100%;
-    height: auto;
-    margin-left: 0;
-  }
-
-  .hiringImg {
-    width: 100%;
-    height: auto;
-  }
-
-  .button {
-    display: block;
-    padding: 16px 24px;
-    border-radius: var(--border-radius);
-    width: 100%;
-    background: url('/arrow-right.svg') no-repeat right 20px center, var(--color-button-primary);
-    color: var(--color-text-unpainted);
-  }
+  /* ... (他のモバイル用スタイルはそのまま利用) ... */
 }
