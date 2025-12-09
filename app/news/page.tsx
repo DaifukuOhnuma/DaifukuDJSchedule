@@ -3,7 +3,7 @@ import { getEventList } from '@/app/_libs/microcms';
 const EVENT_LIST_LIMIT = 10; // ← 分かりやすいようにここで定義するめう
 
 // 🚨 読み込む部品の名前を EventList に変えるめう！
-import EventList from '@/app/_components/NewsList'; 
+import EventList from '@/app/_components/EventList'; 
 import Pagination from '@/app/_components/Pagination';
 
 export default async function Page() {
