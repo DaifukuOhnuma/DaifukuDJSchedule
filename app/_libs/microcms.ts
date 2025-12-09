@@ -7,6 +7,22 @@ import type {
 } from 'microcms-js-sdk';
 import { notFound } from 'next/navigation';
 
+// ----------------------------------------------------
+// イベントの型定義
+export type EventItem = {
+  title: string;          // イベント名 (title)
+  datetime: string;       // 日時 (datetime)
+  genre: string;          // ジャンル (genre)
+  venue: string;          // 会場名 (venue)
+  price: string;          // 料金 (price)
+  coPerformers: string;   // 共演者 (coPerformers)
+  flyerImage?: MicroCMSImage; // フライヤー画像 (flyerImage)
+  url?: string;     // チケットリンク (ticketUrl)
+  xPostText?: string;     // X告知文 (xPostText)
+} & MicroCMSContentId &
+  MicroCMSDate;
+// -
+
 // カテゴリーの型定義
 export type Category = {
   name: string;
@@ -64,10 +80,10 @@ export const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY,
 });
 
-// ニュース一覧を取得
-export const getNewsList = async (queries?: MicroCMSQueries) => {
+// ニュース一覧を取得 (名前を変えてイベント用に使うめう！)
+export const getEventList = async (queries?: MicroCMSQueries) => {
   const listData = await client
-    .getList<News>({
+    .getList<EventItem>({ // ★ここで<EventItem>型を使うめう！
       endpoint: 'events',
       queries,
     })
