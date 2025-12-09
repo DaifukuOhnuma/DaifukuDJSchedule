@@ -11,7 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   overflow: hidden;
-  padding: 160px 0 80px; /* 上に160px、下に80pxの余白を作るめう */
+  padding: 100px 0 80px; /* 上に160px、下に80pxの余白を作るめう */
 }
 
 .title {
