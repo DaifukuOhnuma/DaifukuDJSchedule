@@ -87,7 +87,10 @@ export const getEventList = async (queries?: MicroCMSQueries) => {
       endpoint: 'events',
       queries,
     })
-    .catch(notFound);
+    .catch((error) => {
+      console.error("MicroCMS Error:", error); // エラーをログに出す
+      throw error; // 404にせず、あえてクラッシュさせてエラー画面を出す
+    });
   return listData;
 };
 
@@ -99,7 +102,10 @@ export const getEventDetail = async (contentId: string, queries?: MicroCMSQuerie
       contentId,
       queries,
     })
-    .catch(notFound);
+    .catch((error) => {
+      console.error("MicroCMS Error:", error); // エラーをログに出す
+      throw error; // 404にせず、あえてクラッシュさせてエラー画面を出す
+    });
 
   return detailData;
 };
