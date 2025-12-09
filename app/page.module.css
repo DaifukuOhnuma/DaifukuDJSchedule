@@ -11,8 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5);
   color: #fff;
   overflow: hidden;
-  /* 🚨 修正1: 高さを固定値にすることで、ゆったりとしたスペースを確保するめう！ */
-  height: 60vh; 
+  padding: 160px 0 80px; /* 上に160px、下に80pxの余白を作るめう */
 }
 
 .title {
@@ -84,7 +83,7 @@
 @media (max-width: 640px) {
   .top {
     /* 🚨 修正5: モバイルでも高さを確保するめう！ */
-    height: 40vh;
+    padding: 100px 0 60px;
   }
   .title {
     font-size: 2.5rem; /* モバイルでも少し大きくするめう */
