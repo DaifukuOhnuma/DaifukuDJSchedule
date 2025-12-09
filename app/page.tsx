@@ -5,6 +5,9 @@ import EventList from '@/app/_components/EventList'; // 🚨 EventListを正し�
 import styles from './page.module.css';
 import ButtonLink from '@/app/_components/ButtonLink';
 
+// app/page.tsx の先頭付近に追記めう
+export const revalidate = 3600; // 3600秒 = 1時間ごとに更新チェックするめう
+
 // 取得するイベント数の上限（多めに設定しておくと安心めう）
 const EVENT_LIMIT = 50; 
 
