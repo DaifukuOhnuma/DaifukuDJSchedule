@@ -44,11 +44,11 @@ export default function Article({ data }: Props) {
           </div>
         )}
         
-        {/* チケットリンクがあれば表示 */}
-        {data.ticketUrl && (
+        {/* 外部リンクがあれば表示 */}
+        {data.url && (
            <div style={{ marginTop: '20px' }}>
-             <a href={data.ticketUrl} target="_blank" rel="noopener noreferrer">
-               🎫 チケットを予約するめう！
+             <a href={data.url} target="_blank" rel="noopener noreferrer">
+               リンク先へアクセス！
              </a>
            </div>
         )}
