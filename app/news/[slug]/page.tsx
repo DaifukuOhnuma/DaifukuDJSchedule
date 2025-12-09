@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import { getNewsDetail } from '@/app/_libs/microcms';
-import Article from '@/app/_components/Article';
+import { getEventDetail } from '@/app/_libs/microcms'; // 🚨 getNewsDetail から変更！
+import Article from '@/app/_components/Article'; // 前回修正した Article/index.tsx を使うめう
 import styles from './page.module.css';
 import ButtonLink from '@/app/_components/ButtonLink';
 
@@ -13,38 +13,52 @@ type Props = {
   }>;
 };
 
+// ページのメタデータ（タイトルやOGP画像）を生成する部分めう
 export async function generateMetadata(props: Props): Promise<Metadata> {
   const searchParams = await props.searchParams;
   const params = await props.params;
-  const data = await getNewsDetail(params.slug, {
+  
+  // 🚨 イベント詳細データを取得
+  const data = await getEventDetail(params.slug, {
     draftKey: searchParams.dk,
   });
 
+  // イベント情報を使ってメタデータを作るめう
   return {
     title: data.title,
-    description: data.description,
+    // descriptionがない場合は日時や場所を入れておくと親切めう
+    description: `${data.datetime} @ ${data.venue} - ${data.title}`,
     openGraph: {
       title: data.title,
-      description: data.description,
-      images: [data?.thumbnail?.url || ''],
+      description: `${data.datetime} @ ${data.venue}`,
+      // フライヤー画像があればそれを設定、なければ空文字めう
+      images: [data?.flyerImage?.url || ''],
     },
     alternates: {
-      canonical: `/news/${params.slug}`,
+      // 🚨 canonicalも現在のURL構造に合わせるめう
+      canonical: `/news/${params.slug}`, 
     },
   };
 }
 
+// ページの中身を表示する部分めう
 export default async function Page(props: Props) {
   const searchParams = await props.searchParams;
   const params = await props.params;
-  const data = await getNewsDetail(params.slug, {
+  
+  // 🚨 ここも getEventDetail に変更！
+  const data = await getEventDetail(params.slug, {
     draftKey: searchParams.dk,
   });
+
   return (
     <>
+      {/* 詳細表示コンポーネント（前回修正したやつ）にデータを渡すめう */}
       <Article data={data} />
+      
       <div className={styles.footer}>
-        <ButtonLink href="/news">ニュース一覧へ</ButtonLink>
+        {/* 🚨 トップページが一覧になったから、戻り先を '/' に変更めう */}
+        <ButtonLink href="/">スケジュール一覧へ戻る</ButtonLink>
       </div>
     </>
   );
