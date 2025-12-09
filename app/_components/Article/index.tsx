@@ -39,7 +39,7 @@ export default function Article({ data }: Props) {
         {/* 共演者などの情報を表示するめう */}
         {data.coPerformers && (
           <div>
-             <h3>出演者</h3>
+             <h3>共演いただくみなさま（敬称略）</h3>
              <p style={{ whiteSpace: 'pre-wrap' }}>{data.coPerformers}</p>
           </div>
         )}
