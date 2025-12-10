@@ -71,7 +71,7 @@ export default async function Page() {
         <div className={styles.newsLink}>
           {/* 過去ログ（アーカイブ）ページを作りたいならこのボタンを残すめう */}
           {/* いらないならこのdivごと消してもOKめう */}
-          <ButtonLink href="/news">All Archives</ButtonLink>
+          <ButtonLink href="/events">All Archives</ButtonLink>
         </div>
       </section>
 
